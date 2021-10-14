@@ -1,0 +1,25 @@
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
+
+const server = express();
+
+//Setting
+const port = process.env.PORT || 8080;
+server.set('view engine', 'pug');
+server.set('views', path.join(__dirname, 'views'));
+
+//Router
+server.use(require('./router/index.router'));
+
+//Middleware
+server.use(morgan('dev'));
+server.use(express.urlencoded({extended:true}));
+server.use(express.json());
+
+//Static filex
+server.use(express.static(path.join(__dirname, '..', 'public')));
+
+server.listen(port, () => {
+  console.log(`Server on port ${port}`);
+});
