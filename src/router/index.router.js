@@ -6,9 +6,8 @@ route.get('/', (req, res) => {
 });
 
 route.post('/', (req, res) => {
-  console.log(req.body);
+  console.log(req.body.city);
   res.render('index');
- 
 });
 
 module.exports = route;

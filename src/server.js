@@ -14,7 +14,7 @@ server.use(require('./router/index.router'));
 
 //Middleware
 server.use(morgan('dev'));
-server.use(express.urlencoded({extended:true}));
+server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
 //Static filex
