@@ -9,3 +9,7 @@ head
     form(action='/' method='post')
       input.ghost-input(name='city' type='text' placeholder='Enter a City' required='')
       input.ghost-button(type='submit' value='Get Weather')
+    if weather !== null 
+      p= weather
+    if error !== null 
+      p= error
