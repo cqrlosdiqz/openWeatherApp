@@ -5,6 +5,7 @@ const path = require('path');
 
 
 const server = express();
+require('./config/db')
 
 //Setting
 const port = process.env.PORT || 8080;
