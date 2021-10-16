@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const apiConnection = async (city) => {
   const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.API_KEY}`;
-  console.log('api connected')
+
   try {
     const res = await axios(url);
     const result = {

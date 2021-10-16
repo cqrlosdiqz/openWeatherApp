@@ -18,12 +18,14 @@ route.post('/', async (req, res) => {
       const newLog = new LogModel({ city: search.city, temp: search.temp });
       await newLog.save();
       const weatherText = `It's ${search.temp} degrees in ${search.city}!`;
-      res.render('index', { weather: weatherText, error: null });
+      return res.render('index', { weather: weatherText, error: null });
     } else {
+      
+      //Return true if last log was less than two hours ago
       if (!log.nearLog(new Date())) {
         const search = await apiConnection(city);
         if (search instanceof Error) throw new Error();
-        console.log('no cerca');
+
         const logUpdated = await LogModel.findOneAndUpdate(
           { _id: log._id },
           {
@@ -33,11 +35,11 @@ route.post('/', async (req, res) => {
           { new: true }
         );
         const weatherText = `It's ${logUpdated.temp} degrees in ${logUpdated.city}!`;
-        res.render('index', { weather: weatherText, error: null });
+        return res.render('index', { weather: weatherText, error: null });
       }
-      console.log('Cerca');
+
       const weatherText = `It's ${log.temp} degrees in ${log.city}!`;
-      res.render('index', { weather: weatherText, error: null });
+      return res.render('index', { weather: weatherText, error: null });
     }
   } catch (error) {
     res.render('index', { weather: null, error: 'Error, please try again' });
